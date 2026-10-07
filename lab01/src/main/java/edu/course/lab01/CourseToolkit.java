@@ -1,19 +1,16 @@
 package edu.course.lab01;
 
-
 public final class CourseToolkit {
 
     private CourseToolkit() {
-        // Утилитарный класс не должен иметь экземпляров.
+        
     }
-
 
     public static boolean isEven(int number) {
         return number % 2 == 0;
     }
     
     public static boolean isPrime(int number) {
-        // Базовая проверка: числа меньше 2 не являются простыми
         if (number < 2) {
             return false;
         }
@@ -33,7 +30,6 @@ public final class CourseToolkit {
     } 
 
     public static double average(int[] numbers) {
-        // Базовая проверка: если массив пустой, возвращаем 0, чтобы избежать деления на ноль
         if (numbers == null || numbers.length == 0) {
             return 0.0;
         }
@@ -45,4 +41,34 @@ public final class CourseToolkit {
         
         return sum / numbers.length;
     } 
+
+    public static int min(int[] numbers) {
+        if (numbers == null || numbers.length == 0) {
+            return 0; 
+        }
+        
+        int minValue = numbers[0];
+        for (int number : numbers) {
+            if (number < minValue) {
+                minValue = number;
+            }
+        }
+        
+        return minValue;
+    }
+
+    public static int max(int[] numbers) {
+        if (numbers == null || numbers.length == 0) {
+            return 0; 
+        }
+        
+        int maxValue = numbers[0];
+        for (int number : numbers) {
+            if (number > maxValue) {
+                maxValue = number;
+            }
+        }
+        
+        return maxValue;
+    }
 }
