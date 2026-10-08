@@ -49,9 +49,23 @@ class DataSampleTest {
 
     @Test
     void testInvalidConstructorArguments() {
-        // Проверяем, что класс отбивается от плохих данных
         assertThrows(IllegalArgumentException.class, () -> new DataSample("", "label", new double[]{1.0}));
         assertThrows(IllegalArgumentException.class, () -> new DataSample("id", null, new double[]{1.0}));
         assertThrows(IllegalArgumentException.class, () -> new DataSample("id", "label", null));
     }
+
+    @Test
+    void testNormalizationImmutability() {
+        double[] features = {5.0, 10.0, 20.0};
+        DataSample original = new DataSample("norm_01", "test", features);
+        
+        DataSample normalized = original.normalize();
+        
+        assertEquals(20.0, original.getFeatures()[2], 0.0001);
+        
+        // Проверяем, что у нового объекта признаки поделились на максимум (20.0)
+        assertEquals(1.0, normalized.getFeatures()[2], 0.0001); // 20.0 / 20.0 = 1.0
+        assertEquals(0.5, normalized.getFeatures()[1], 0.0001); // 10.0 / 20.0 = 0.5
+    }
+
 }

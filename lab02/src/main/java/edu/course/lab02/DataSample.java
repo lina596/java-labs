@@ -50,8 +50,36 @@ public double calculateAverageFeature() {
     return sum / this.features.length;
 }
 
-// Требование из "Общего контракта" п.5: массив копируется при возврате
 public double[] getFeatures() {
     return this.features.clone();
 }
+
+    public DataSample normalize() {
+        if (this.features.length == 0) {
+            // Если массив пустой, возвращаем копию текущего объекта
+            return new DataSample(this.id, this.label, new double[0]);
+        }
+
+        double max = Math.abs(this.features[0]);
+        for (double f : this.features) {
+            if (Math.abs(f) > max) {
+                max = Math.abs(f);
+            }
+        }
+
+        double[] normalizedFeatures = new double[this.features.length];
+        if (max == 0.0) {
+            // Массив заполнен нулями, возвращаем копию
+            return new DataSample(this.id, this.label, this.features);
+        }
+
+        for (int i = 0; i < this.features.length; i++) {
+            normalizedFeatures[i] = this.features[i] / max;
+        }
+
+        DataSample normalizedSample = new DataSample(this.id, this.label, normalizedFeatures);
+        normalizedSample.changeStatus(this.status); // Сохраняем текущий статус
+        return normalizedSample;
+    }
+
 }
