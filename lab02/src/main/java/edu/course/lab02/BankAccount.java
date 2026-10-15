@@ -12,7 +12,6 @@ public class BankAccount {
         this.balance = initialBalance; 
     }
 
-    // Единственный легальный способ узнать, сколько денег на счету (геттер)
     public int getBalance() {
         return this.balance;
     }

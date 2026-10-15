@@ -32,12 +32,10 @@ public void changeStatus(SampleStatus newStatus) {
     this.status = newStatus;
 }
 
-// Операция: определить, готово ли наблюдение
 public boolean isReady() {
     return this.status == SampleStatus.READY;
 }
 
-// Операция: вычислить среднее значение признаков
 public double calculateAverageFeature() {
     if (this.features.length == 0) {
         return 0.0; 
@@ -56,7 +54,6 @@ public double[] getFeatures() {
 
     public DataSample normalize() {
         if (this.features.length == 0) {
-            // Если массив пустой, возвращаем копию текущего объекта
             return new DataSample(this.id, this.label, new double[0]);
         }
 
@@ -69,7 +66,6 @@ public double[] getFeatures() {
 
         double[] normalizedFeatures = new double[this.features.length];
         if (max == 0.0) {
-            // Массив заполнен нулями, возвращаем копию
             return new DataSample(this.id, this.label, this.features);
         }
 
